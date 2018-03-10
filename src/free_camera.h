@@ -6,6 +6,8 @@
 namespace graphics_framework {
 class free_camera : public camera {
 private:
+  // Current rotation on the z-axis (roll)
+  float _roll = 0.0f;
   // Current rotation on the x-axis (pitch)
   float _pitch = 0.0f;
   // Current rotation on the y-axis (yaw)
@@ -28,7 +30,8 @@ public:
   void set_yaw(float value) { _yaw = value; }
   // Rotates the camera by the given yaw (y-axis) and pitch (x-axis)
   void rotate(float delta_yaw, float delta_pitch);
-  // Moves the camera
+  void roll(float delta_roll);
+  // Moves the camera    
   void move(const glm::vec3 &translation);
   //
   glm::vec3 get_forward() const;

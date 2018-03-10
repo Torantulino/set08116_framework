@@ -12,7 +12,10 @@ void free_camera::update(float delta_time) {
   auto forward = get_forward();
 
   // Calculate standard right.  Rotate right vector by yaw
-  glm::vec3 right = glm::vec3(glm::eulerAngleY(_yaw) * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+  glm::vec3 right = glm::vec3(glm::eulerAngleZ(_roll) * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+  // Calculate right with roll
+  right = glm::vec3(glm::eulerAngleY(_yaw) * glm::vec4(right, 1.0f));
+  //right = glm::vec3(glm::eulerAngleZ(_roll) * glm::vec4(right, 1.0f));
   // Normalize right
   right = glm::normalize(right);
 
@@ -46,13 +49,17 @@ void free_camera::rotate(float delta_yaw, float delta_pitch) {
   _yaw -= delta_yaw;
 }
 
+void free_camera::roll(float delta_roll) { 
+  _roll += delta_roll;
+}
+
 /*
 Moves the free camera.  This is used in the update with the orientation to
 calculate actual movement
 */
 void free_camera::move(const glm::vec3 &translation) {
   // Just add translation vector to current translation
-  _translation += translation;
+	_translation += translation;
 }
 glm::vec3 free_camera::get_forward() const {
   return glm::normalize(glm::vec3(cosf(_pitch) * -sinf(_yaw), sinf(_pitch), -cosf(_yaw) * cosf(_pitch)));
