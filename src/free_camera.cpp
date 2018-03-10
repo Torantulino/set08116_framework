@@ -12,7 +12,7 @@ void free_camera::update(float delta_time) {
   auto forward = get_forward();
 
   // Calculate standard right.  Rotate right vector by yaw
-  glm::vec3 right = glm::vec3(glm::eulerAngleZ(_roll) * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+  glm::vec3 right = glm::vec3(glm::eulerAngleZ(_roll) * glm::vec4(right, 1.0f));
   // Calculate right with roll
   right = glm::vec3(glm::eulerAngleY(_yaw) * glm::vec4(right, 1.0f));
   //right = glm::vec3(glm::eulerAngleZ(_roll) * glm::vec4(right, 1.0f));
