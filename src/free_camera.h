@@ -30,6 +30,7 @@ public:
   void set_yaw(float value) { _yaw = value; }
   // Rotates the camera by the given yaw (y-axis) and pitch (x-axis)
   void rotate(float delta_yaw, float delta_pitch);
+  // Rotates the camera by the given roll (z-axis)
   void roll(float delta_roll);
   // Moves the camera    
   void move(const glm::vec3 &translation);
